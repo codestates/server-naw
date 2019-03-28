@@ -1,0 +1,9 @@
+{
+  "name": "server-naw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "upstream",
+  "author": "Rockheung <rockheung@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
