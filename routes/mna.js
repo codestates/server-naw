@@ -9,7 +9,19 @@ const fakeMnaList = JSON.parse(
 
 /* GET mna listing. */
 router.get("/:id", function(req, res, next) {
-  res.send(JSON.stringify(fakeMnaList[req.params.id]));
+  var getMna = fakeMnaList.filter(guy => {
+    return guy.id === +req.params.id;
+  })[0];
+
+  if (getMna) {
+    res
+      .status(200)
+      .type("json")
+      .send(JSON.stringify(getMna));
+    return;
+  }
+
+  res.status(403).end();
 });
 
 module.exports = router;
