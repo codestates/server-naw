@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "홍영표",
+    "chinesename": "洪永杓",
+    "photo": "http://www.assembly.go.kr/photo/9770676.jpg",
+    "party_id": 1,
+    "local": "인천 부평구을",
+    "stdcomt": "국회운영위원회, 국방위원회, 정보위원회",
+    "phone": "02-784-3143",
+    "address": "의원회관 1004호",
+    "fax": "02-788-0391",
+    "blog": "http://www.dreamyp.or.kr/",
+    "twtr": "https://twitter.com/YoungpyoHong",
+    "fb": "https://www.facebook.com/ypbupyeong"
+  },
+  {
+    "id": 2,
+    "name": "나경원",
+    "chinesename": "羅卿瑗",
+    "photo": "http://www.assembly.go.kr/photo/9770903.jpg",
+    "party_id": 2,
+    "local": "서울 동작구을",
+    "stdcomt": "국회운영위원회, 기획재정위원회, 정보위원회",
+    "phone": "02-784-3103",
+    "address": "의원회관 450호",
+    "fax": "02-788-0349",
+    "blog": "http://blog.naver.com/nakw63",
+    "twtr": "https://twitter.com/nakw",
+    "fb": "https://www.facebook.com/nakw1963"
+  },
+  {
+    "id": 3,
+    "name": "김관영",
+    "chinesename": "金寬永",
+    "photo": "http://www.assembly.go.kr/photo/9770713.jpg",
+    "party_id": 3,
+    "local": "전북 군산시",
+    "stdcomt": "국회운영위원회, 산업통상자원중소벤처기업위원회, 정보위원회",
+    "phone": "02-784-1781",
+    "address": "의원회관 507호",
+    "fax": "02-788-0116",
+    "blog": "http://usekky.com/",
+    "twtr": "https://twitter.com/usekky",
+    "fb": "https://www.facebook.com/usekky"
+  }
+]
