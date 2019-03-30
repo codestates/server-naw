@@ -1,4 +1,8 @@
 
+# yarn을 쓸 것이라 제외
+package-lock.json
+yarn.lock
+
 # Created by https://www.gitignore.io/api/node,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=node,visualstudiocode
 

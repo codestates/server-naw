@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "더불어민주당",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Logo_of_the_Minjoo_Party_of_Korea.svg/1920px-Logo_of_the_Minjoo_Party_of_Korea.svg.png",
+    "color": "#025AAA",
+    "homepage": "http://theminjoo.kr"
+  },
+  {
+    "id": 2,
+    "name": "자유한국당",
+    "logo": "http://www.libertykoreaparty.kr/images/introduce/logo/colorset.gif",
+    "color": "#C9151E",
+    "homepage": "http://www.libertykoreaparty.kr"
+  },
+  {
+    "id": 3,
+    "name": "바른미래당",
+    "logo": "http://bareunmirae.kr/images/content/logo_img1_1.jpg",
+    "color": "#00B7B5",
+    "homepage": "http://bareunmirae.kr"
+  },
+  {
+    "id": 4,
+    "name": "민주평화당",
+    "logo": "http://peaceparty.or.kr/theme/peace_party/img/logo_fix2.png",
+    "color": "#78b600",
+    "homepage": "http://peaceparty.or.kr"
+  },
+  {
+    "id": 5,
+    "name": "정의당",
+    "logo": "https://www.justice21.org/newhome/asset/images/about/logo_sign2_01.gif",
+    "color": "#FFCB08",
+    "homepage": "https://www.justice21.org"
+  },
+  {
+    "id": 6,
+    "name": "무소속",
+    "logo": null,
+    "color": "#808080",
+    "homepage": ""
+  },
+  {
+    "id": 7,
+    "name": "민중당",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Logo_of_the_Minjung_Party.svg/330px-Logo_of_the_Minjung_Party.svg.png",
+    "color": "#EB5B04",
+    "homepage": "http://minjungparty.com"
+  },
+  {
+    "id": 8,
+    "name": "대한애국당",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Logo_of_the_Korean_Patriots_Party.svg/1920px-Logo_of_the_Korean_Patriots_Party.svg.png",
+    "color": "#092C66",
+    "homepage": "http://gkpp.or.kr"
+  }
+]
