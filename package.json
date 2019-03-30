@@ -6,12 +6,15 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "basename": "^0.1.2",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
+    "env": "^0.0.2",
     "express": "~4.16.0",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.5",
-    "sequelize": "^5.2.3"
+    "nodemon": "^1.18.10",
+    "sequelize": "^5.2.5"
   }
 }
