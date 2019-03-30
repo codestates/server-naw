@@ -11,8 +11,8 @@ const fakeMnaList = JSON.parse(
 
 /* GET mna listing. */
 router.get("/:id", function(req, res, next) {
-  var getMna = fakeMnaList.filter(guy => {
-    return guy.id === +req.params.id;
+  var getMna = fakeMnaList.filter(mna => {
+    return mna.id === +req.params.id;
   })[0];
 
   Object.assign(getMna, attendanceRate());
