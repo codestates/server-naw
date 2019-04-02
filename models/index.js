@@ -22,14 +22,18 @@ if (config.use_env_variable) {
 
 sequelize.sync();
 
-fs.readdirSync(__dirname)
+console.log(path.join(__dirname, "/migrations"));
+
+fs.readdirSync(path.join(__dirname, "/migrations"))
   .filter(file => {
     return (
       file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
     );
   })
   .forEach(file => {
-    const model = sequelize["import"](path.join(__dirname, file));
+    const model = sequelize["import"](
+      path.join(__dirname, "/migrations", file)
+    );
     db[model.name] = model;
   });
 
