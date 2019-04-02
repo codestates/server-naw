@@ -1,8 +1,8 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('INTER_CONGRESS', {
-		INTER_MNA_ID: {
+	return sequelize.define('MNA_STDCOMT_LINK_TABLE', {
+		ID: {
 			type: DataTypes.INTEGER(11),
 			allowNull: false,
 			primaryKey: true
@@ -15,15 +15,15 @@ module.exports = function(sequelize, DataTypes) {
 				key: 'mna_id'
 			}
 		},
-		USER_ID: {
+		STDCOMT_ID: {
 			type: DataTypes.INTEGER(11),
 			allowNull: true,
 			references: {
-				model: 'USERS',
-				key: 'user_id'
+				model: 'STDCOMT',
+				key: 'stdcomt_id'
 			}
 		}
 	}, {
-		tableName: 'INTER_CONGRESS'
+		tableName: 'MNA_STDCOMT_LINK_TABLE'
 	});
 };
