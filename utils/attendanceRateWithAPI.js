@@ -1,7 +1,6 @@
 const fs = require("fs");
 const http = require("http");
 const querystring = require("querystring").stringify;
-const unescape = require("querystring").unescape;
 const parseString = require("xml2js").parseString;
 const serviceKey = fs.readFileSync(__dirname + "/../.publicAPIKey", "utf8");
 
@@ -16,17 +15,16 @@ let options = {
   }
 };
 
-const getSummaryAttenInfo = options => {
+const getSummaryAttenInfo = (options = options) => {
   return new Promise((resolve, reject) => {
     http
       .get(
         options.host +
           options.endpoint +
           querystring(options.query, null, null, {
-            encodeURIComponent: e => e
+            encodeURIComponent: asIs => asIs
           }),
         res => {
-          console.log(res);
           const { statusCode } = res;
           const contentType = res.headers["content-type"];
 
@@ -72,13 +70,5 @@ const getSummaryAttenInfo = options => {
       });
   });
 };
-
-getSummaryAttenInfo(options)
-  .then(res => {
-    console.log(res);
-  })
-  .catch(e => {
-    console.log(e);
-  });
 
 module.export = getSummaryAttenInfo;
