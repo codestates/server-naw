@@ -1,4 +1,8 @@
 
+# 공공데이터포털 key
+.publicAPIKey
+*.rest
+
 # yarn을 쓸 것이라 제외
 package-lock.json
 yarn.lock
