@@ -1,21 +1,30 @@
 const fs = require("fs");
 const http = require("http");
+const querystring = require("querystring").stringify;
+const unescape = require("querystring").unescape;
 const parseString = require("xml2js").parseString;
-const ServiceKey = fs.readFileSync(__dirname + "/../.publicAPIKey", "utf8");
+const serviceKey = fs.readFileSync(__dirname + "/../.publicAPIKey", "utf8");
 
-let numOfRows = "10";
-let pageNo = "1";
-let confer_num = "045414";
+let options = {
+  host: `http://apis.data.go.kr/9710000/ProceedingInfoService`,
+  endpoint: `/getSummaryAttenInfoList?`,
+  query: {
+    serviceKey: serviceKey,
+    numOfRows: "10",
+    pageNo: "1",
+    confer_num: "045414"
+  }
+};
 
-let PublicAPI = `http://apis.data.go.kr/9710000/ProceedingInfoService`;
-let getSummaryAttenInfoUrl = `/getSummaryAttenInfoList`;
-let getSummaryAttenInfoQuerystring = `?ServiceKey=${ServiceKey}&numOfRows=${numOfRows}&pageNo=${pageNo}&confer_num=${confer_num}`;
-
-const getSummaryAttenInfo = () => {
+const getSummaryAttenInfo = options => {
   return new Promise((resolve, reject) => {
     http
       .get(
-        PublicAPI + getSummaryAttenInfoUrl + getSummaryAttenInfoQuerystring,
+        options.host +
+          options.endpoint +
+          querystring(options.query, null, null, {
+            encodeURIComponent: unescape
+          }),
         res => {
           const { statusCode } = res;
           const contentType = res.headers["content-type"];
@@ -24,14 +33,13 @@ const getSummaryAttenInfo = () => {
             reject(
               new Error("Request Failed.\n" + `Status Code: ${statusCode}`)
             );
-          } else if (!/^application\/xml/.test(contentType)) {
+          } else if (!/^(application|text)\/xml/.test(contentType)) {
             reject(
               new Error(
                 "Invalid content-type.\n" +
                   `Expected application/xml but received ${contentType}`
               )
             );
-          } else if (false) {
           }
 
           res.setEncoding("utf8");
@@ -42,6 +50,7 @@ const getSummaryAttenInfo = () => {
           res.on("end", () => {
             try {
               parseString(rawData, (err, result) => {
+                console.log(result);
                 let apiStatus = result.response.header[0].resultCode[0];
                 if (err) {
                   reject(err);
@@ -63,6 +72,12 @@ const getSummaryAttenInfo = () => {
   });
 };
 
-getSummaryAttenInfo().then(res => {
-  console.log(res);
-});
+getSummaryAttenInfo(options)
+  .then(res => {
+    console.log(res);
+  })
+  .catch(e => {
+    console.log(e);
+  });
+
+module.export = getSummaryAttenInfo;
