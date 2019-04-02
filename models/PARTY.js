@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
 			primaryKey: true
 		},
 		PARTY_NAME: {
-			type: DataTypes.TEXT,
+			type: DataTypes.STRING(100),
 			allowNull: true
 		},
 		PARTY_LOGO: {

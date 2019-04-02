@@ -12,11 +12,11 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: true
 		},
 		START_DATE: {
-			type: DataTypes.DATEONLY,
+			type: DataTypes.STRING(50),
 			allowNull: true
 		},
 		END_DATE: {
-			type: DataTypes.DATEONLY,
+			type: DataTypes.STRING(50),
 			allowNull: true
 		}
 	}, {
