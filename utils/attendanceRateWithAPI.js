@@ -23,9 +23,10 @@ const getSummaryAttenInfo = options => {
         options.host +
           options.endpoint +
           querystring(options.query, null, null, {
-            encodeURIComponent: unescape
+            encodeURIComponent: e => e
           }),
         res => {
+          console.log(res);
           const { statusCode } = res;
           const contentType = res.headers["content-type"];
 
