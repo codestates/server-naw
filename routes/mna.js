@@ -4,6 +4,8 @@ var express = require("express");
 var router = express.Router();
 var MNA = require("../models").MNA;
 
+const Mna = require("../models").MNA;
+
 // const { attendanceRate } = require("../utils/attendanceRate.js");
 
 // const fakeMnaList = JSON.parse(
@@ -37,21 +39,23 @@ router.get("/:id", (req, res, next) => {
 });
 
 /* GET mna listing. */
-// router.get("/:id", function(req, res, next) {
-//   var getMna = fakeMnaList.filter(mna => {
-//     return mna.id === +req.params.id;
-//   })[0];
 
-//   Object.assign(getMna, attendanceRate(getMna, fakePdfData));
-//   if (getMna) {
-//     res
-//       .status(200)
-//       .type("json")
-//       .send(JSON.stringify(getMna));
-//     return;
-//   }
+router.get("/:id", function(req, res, next) {
+  var getMna = fakeMnaList.filter(mna => {
+    Mna.findById(+req.params.id).then(mna => console.log(mna));
+    return mna.id === +req.params.id;
+  })[0];
 
-//   res.status(403).end();
-// });
+  Object.assign(getMna, attendanceRate(getMna, fakePdfData));
+  if (getMna) {
+    res
+      .status(200)
+      .type("json")
+      .send(JSON.stringify(getMna));
+    return;
+  }
+
+  res.status(403).end();
+});
 
 module.exports = router;
