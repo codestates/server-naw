@@ -1,15 +1,15 @@
-/* jshint indent: 1 */
-
-module.exports = function(sequelize, DataTypes) {
-  const CONGRESSES = sequelize.define(
-    "CONGRESSES",
+"use strict";
+module.exports = (sequelize, DataTypes) => {
+  const CONGRESS = sequelize.define(
+    "CONGRESS",
     {
       CONGRESS_ID: {
         type: DataTypes.INTEGER(11),
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
       },
-      CONGRESS: {
+      CONGRESS_NAME: {
         type: DataTypes.STRING(50),
         allowNull: true
       },
@@ -22,10 +22,10 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: true
       }
     },
-    {
-      tableName: "CONGRESSES"
-    }
+    {}
   );
-
-  return CONGRESSES;
+  CONGRESS.associate = function(models) {
+    // associations can be defined here
+  };
+  return CONGRESS;
 };
