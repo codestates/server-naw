@@ -12,11 +12,13 @@
     "debug": "~2.6.9",
     "env": "^0.0.2",
     "express": "~4.16.0",
+    "global": "^4.3.2",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.5",
     "nodemon": "^1.18.10",
     "pdf2json": "^1.1.8",
     "sequelize": "^5.2.3",
+    "sequelize-cli": "^5.4.0",
     "xml2js": "^0.4.19"
   },
   "devDependencies": {}
