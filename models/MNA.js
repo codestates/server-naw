@@ -45,36 +45,26 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true
       },
-      // PARTY_ID: {
-      //   type: DataTypes.INTEGER(11),
-      //   allowNull: true,
-      //   references: {
-      //     model: "PARTY",
-      //     key: "PARTY_ID"
-      //   }
-      // },
-      STDCOMT_ID: {
+      PARTY_ID: {
         type: DataTypes.INTEGER(11),
-        allowNull: true,
-        references: {
-          model: "STDCOMT",
-          key: "STDCOMT_ID"
-        }
+        allowNull: true
+      },
+      LOCAL_ID: {
+        type: DataTypes.INTEGER(11),
+        allowNull: true
       }
-      // LOCAL_ID: {
-      //   type: DataTypes.INTEGER(11),
-      //   allowNull: true,
-      //   references: {
-      //     model: "LOCAL",
-      //     key: "LOCAL_ID"
-      //   }
-      // }
     },
     {}
   );
   MNA.associate = function(models) {
     // associations can be defined here
-    MNA.belongsTo(models.STDCOMT, { foreignKey: "STDCOMT_ID" });
+    MNA.belongsTo(models.PARTY, { foreignKey: "MNA_ID" });
+    MNA.belongsToMany(
+      models.STDCOMT,
+      { through: models.MNA_STDCOMT_LINK_TABLE },
+      { foreignKey: "MNA_ID" }
+    );
+    MNA.belongsTo(models.LOCAL, { foreignKey: "MNA_ID" });
   };
   return MNA;
 };
