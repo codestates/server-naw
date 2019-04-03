@@ -70,32 +70,5 @@ module.exports = function(sequelize, DataTypes) {
       tableName: "MNA"
     }
   );
-
-  MNA.associate = function(models) {};
-
-  MNA.getList = () => {
-    return sequelize
-      .query(
-        "select * from MNA as M INNER JOIN LOCAL AS L INNER JOIN PARTY AS P ON M.LOCAL_ID = L.LOCAL_ID AND M.PARTY_ID = P.PARTY_ID ORDER BY M.MNA_ID;",
-        {
-          model: MNA,
-          mapToModel: true
-        }
-      )
-      .then(MNA => MNA);
-  };
-
-  MNA.findMna = id => {
-    return sequelize
-      .query(
-        `select * from MNA as M INNER JOIN LOCAL AS L INNER JOIN PARTY AS P ON M.MNA_ID = ${id} AND M.LOCAL_ID = L.LOCAL_ID AND M.PARTY_ID = P.PARTY_ID ORDER BY M.MNA_ID;`,
-        {
-          model: MNA,
-          mapToModel: true
-        }
-      )
-      .then(MNA => MNA);
-  };
-
   return MNA;
 };

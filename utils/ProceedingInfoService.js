@@ -15,7 +15,7 @@ let options = {
   }
 };
 
-const getSummaryAttenInfo = (options = options) => {
+const ProceedingInfoService = (options = options) => {
   return new Promise((resolve, reject) => {
     http
       .get(
@@ -49,7 +49,16 @@ const getSummaryAttenInfo = (options = options) => {
           res.on("end", () => {
             try {
               parseString(rawData, (err, result) => {
-                console.log(result);
+                if (result.OpenAPI_ServiceResponse) {
+                  let err = new Error(
+                    result.OpenAPI_ServiceResponse.cmmMsgHeader[0].errMsg[0] +
+                      ": " +
+                      result.OpenAPI_ServiceResponse.cmmMsgHeader[0]
+                        .returnAuthMsg[0]
+                  );
+                  reject(err);
+                  return;
+                }
                 let apiStatus = result.response.header[0].resultCode[0];
                 if (err) {
                   reject(err);
@@ -71,4 +80,4 @@ const getSummaryAttenInfo = (options = options) => {
   });
 };
 
-module.export = getSummaryAttenInfo;
+module.export = ProceedingInfoService;
