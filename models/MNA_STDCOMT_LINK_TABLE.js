@@ -7,13 +7,13 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER(11)
+        type: DataTypes.INTEGER(11)
       },
       MNA_ID: {
-        type: Sequelize.INTEGER(11)
+        type: DataTypes.INTEGER(11)
       },
       STDCOMT_ID: {
-        type: Sequelize.INTEGER(11)
+        type: DataTypes.INTEGER(11)
       }
     },
     {}

@@ -53,14 +53,6 @@ module.exports = {
           key: "PARTY_ID"
         }
       },
-      STDCOMT_ID: {
-        type: Sequelize.INTEGER(11),
-        allowNull: true,
-        references: {
-          model: "STDCOMT",
-          key: "STDCOMT_ID"
-        }
-      },
       LOCAL_ID: {
         type: Sequelize.INTEGER(11),
         allowNull: true,

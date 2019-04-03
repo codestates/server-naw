@@ -40,22 +40,22 @@ router.get("/:id", (req, res, next) => {
 
 /* GET mna listing. */
 
-router.get("/:id", function(req, res, next) {
-  var getMna = fakeMnaList.filter(mna => {
-    Mna.findById(+req.params.id).then(mna => console.log(mna));
-    return mna.id === +req.params.id;
-  })[0];
+// router.get("/:id", function(req, res, next) {
+//   var getMna = fakeMnaList.filter(mna => {
+//     Mna.findById(+req.params.id).then(mna => console.log(mna));
+//     return mna.id === +req.params.id;
+//   })[0];
 
-  Object.assign(getMna, attendanceRate(getMna, fakePdfData));
-  if (getMna) {
-    res
-      .status(200)
-      .type("json")
-      .send(JSON.stringify(getMna));
-    return;
-  }
+//   Object.assign(getMna, attendanceRate(getMna, fakePdfData));
+//   if (getMna) {
+//     res
+//       .status(200)
+//       .type("json")
+//       .send(JSON.stringify(getMna));
+//     return;
+//   }
 
-  res.status(403).end();
-});
+//   res.status(403).end();
+// });
 
 module.exports = router;
