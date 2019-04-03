@@ -1,7 +1,6 @@
 const fs = require("fs");
 const http = require("http");
 const querystring = require("querystring").stringify;
-const unescape = require("querystring").unescape;
 const parseString = require("xml2js").parseString;
 const serviceKey = fs.readFileSync(__dirname + "/../.publicAPIKey", "utf8");
 
@@ -16,17 +15,16 @@ let options = {
   }
 };
 
-const getSummaryAttenInfo = options => {
+const ProceedingInfoService = (options = options) => {
   return new Promise((resolve, reject) => {
     http
       .get(
         options.host +
           options.endpoint +
           querystring(options.query, null, null, {
-            encodeURIComponent: e => e
+            encodeURIComponent: asIs => asIs
           }),
         res => {
-          console.log(res);
           const { statusCode } = res;
           const contentType = res.headers["content-type"];
 
@@ -51,7 +49,16 @@ const getSummaryAttenInfo = options => {
           res.on("end", () => {
             try {
               parseString(rawData, (err, result) => {
-                console.log(result);
+                if (result.OpenAPI_ServiceResponse) {
+                  let err = new Error(
+                    result.OpenAPI_ServiceResponse.cmmMsgHeader[0].errMsg[0] +
+                      ": " +
+                      result.OpenAPI_ServiceResponse.cmmMsgHeader[0]
+                        .returnAuthMsg[0]
+                  );
+                  reject(err);
+                  return;
+                }
                 let apiStatus = result.response.header[0].resultCode[0];
                 if (err) {
                   reject(err);
@@ -73,12 +80,4 @@ const getSummaryAttenInfo = options => {
   });
 };
 
-getSummaryAttenInfo(options)
-  .then(res => {
-    console.log(res);
-  })
-  .catch(e => {
-    console.log(e);
-  });
-
-module.export = getSummaryAttenInfo;
+module.export = ProceedingInfoService;

@@ -4,6 +4,9 @@
 *.rest
 db_back.sql
 
+# REST Client result
+Response-*.xml
+
 # yarn을 쓸 것이라 제외
 package-lock.json
 

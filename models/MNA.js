@@ -1,12 +1,12 @@
-/* jshint indent: 1 */
-
-module.exports = function(sequelize, DataTypes) {
+"use strict";
+module.exports = (sequelize, DataTypes) => {
   const MNA = sequelize.define(
     "MNA",
     {
       MNA_ID: {
         type: DataTypes.INTEGER(11),
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
       },
       MNA_NAME: {
@@ -21,27 +21,7 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.TEXT,
         allowNull: true
       },
-      PARTY_ID: {
-        type: DataTypes.INTEGER(11),
-        allowNull: true,
-        references: {
-          model: "PARTY",
-          key: "party_id"
-        }
-      },
-      LOCAL_ID: {
-        type: DataTypes.INTEGER(11),
-        allowNull: true,
-        references: {
-          model: "LOCAL",
-          key: "local_id"
-        }
-      },
       MNA_HISTORY: {
-        type: DataTypes.TEXT,
-        allowNull: true
-      },
-      STDCOMT_TEXT: {
         type: DataTypes.TEXT,
         allowNull: true
       },
@@ -64,14 +44,28 @@ module.exports = function(sequelize, DataTypes) {
       MNA_URL: {
         type: DataTypes.TEXT,
         allowNull: true
+      },
+      PARTY_ID: {
+        type: DataTypes.INTEGER(11),
+        allowNull: true
+      },
+      LOCAL_ID: {
+        type: DataTypes.INTEGER(11),
+        allowNull: true
       }
     },
-    {
-      tableName: "MNA"
-    }
+    {}
   );
-
-  MNA.associate = function(models) {};
+  MNA.associate = function(models) {
+    // associations can be defined here
+    MNA.belongsTo(models.PARTY, { foreignKey: "PARTY_ID" });
+    MNA.belongsToMany(
+      models.STDCOMT,
+      { through: models.MNA_STDCOMT_LINK_TABLE },
+      { foreignKey: "MNA_ID" }
+    );
+    MNA.belongsTo(models.LOCAL, { foreignKey: "LOCAL_ID" });
+  };
 
   MNA.getList = () => {
     return sequelize
