@@ -12,10 +12,12 @@ module.exports = {
           STDCOMT_NAME: "공공부문 채용비리 의혹과 관련된 국정조사특별위원회"
         },
         {
-          STDCOMT_NAME: "과학기술정보방송통신위원회"
+          STDCOMT_NAME: "과학기술정보방송통신위원회",
+          COMM_CODE: "AB"
         },
         {
-          STDCOMT_NAME: "교육위원회"
+          STDCOMT_NAME: "교육위원회",
+          COMM_CODE: "AC"
         },
         {
           STDCOMT_NAME: "국방위원회",
@@ -41,7 +43,8 @@ module.exports = {
           COMM_CODE: "JR"
         },
         {
-          STDCOMT_NAME: "문화체육관광위원회"
+          STDCOMT_NAME: "문화체육관광위원회",
+          COMM_CODE: "AE"
         },
         {
           STDCOMT_NAME: "법제사법위원회",
@@ -55,7 +58,8 @@ module.exports = {
           STDCOMT_NAME: "사법개혁 특별위원회"
         },
         {
-          STDCOMT_NAME: "산업통상자원중소벤처기업위원회"
+          STDCOMT_NAME: "산업통상자원중소벤처기업위원회",
+          COMM_CODE: "AD"
         },
         {
           STDCOMT_NAME: "에너지 특별위원회"

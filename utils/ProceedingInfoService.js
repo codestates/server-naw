@@ -75,9 +75,9 @@ const ProceedingInfoService = (options = options) => {
         }
       )
       .on("error", e => {
-        console.log(`Got error: e.message`);
+        console.log(`Got error: ${e.message}`);
       });
   });
 };
 
-module.export = ProceedingInfoService;
+module.exports = ProceedingInfoService;
