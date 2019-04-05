@@ -18,7 +18,14 @@ const Mna = require("../models").MNA;
 router.get("", (req, res, next) => {
   Mna.getList()
     .then(result => {
-      res.status(200).json(result);
+      console.log(result.slice(0, 3));
+      let mnaListData = result.map(mnaItem => ({
+        mnaName: mnaItem.dataValues.MNA_NAME,
+        party: "자유한국당",
+        attendanceRate: 50,
+        billCount: 21
+      }));
+      res.status(200).json(mnaListData);
     })
     .catch(err => {
       console.log(err);
@@ -39,9 +46,10 @@ router.get("/:id", (req, res, next) => {
         local: "서울 동작구을",
         stdcomt: mnaData.STDCOMT_TEXT,
         phone: mnaData.MNA_PHONE,
-        address: "의원회관 450호",
+        address: mnaData.MNA_ADDRESS,
         email: mnaData.MNA_EMAIL,
-        mna_url: "https://twitter.com/nakw",
+        mna_url: mnaData.MNA_URL,
+        hoepage: mnaData.MNA_HOMEPAGE,
         history: mnaData.MNA_HISTORY,
         stdcomtAttendanceRate: 0.88,
         stdcomtAttendanceRatePosition: 20,
