@@ -45,6 +45,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true
       },
+      STDCOMT_TEXT: {
+        type: DataTypes.TEXT,
+        allowNull: true
+      },
       PARTY_ID: {
         type: DataTypes.INTEGER(11),
         allowNull: true
@@ -70,7 +74,12 @@ module.exports = (sequelize, DataTypes) => {
   MNA.getList = () => {
     return sequelize
       .query(
-        "select * from MNA as M INNER JOIN LOCAL AS L INNER JOIN PARTY AS P ON M.LOCAL_ID = L.LOCAL_ID AND M.PARTY_ID = P.PARTY_ID ORDER BY M.MNA_ID;",
+        `select * 
+        from MNA as M 
+        INNER JOIN LOCAL AS L 
+        INNER JOIN PARTY AS P 
+        ON M.LOCAL_ID = L.LOCAL_ID AND M.PARTY_ID = P.PARTY_ID 
+        ORDER BY M.MNA_ID;`,
         {
           model: MNA,
           mapToModel: true
@@ -82,7 +91,12 @@ module.exports = (sequelize, DataTypes) => {
   MNA.findMna = id => {
     return sequelize
       .query(
-        `select * from MNA as M INNER JOIN LOCAL AS L INNER JOIN PARTY AS P ON M.MNA_ID = ${id} AND M.LOCAL_ID = L.LOCAL_ID AND M.PARTY_ID = P.PARTY_ID ORDER BY M.MNA_ID;`,
+        `select * 
+        from MNA as M 
+        INNER JOIN LOCAL AS L 
+        INNER JOIN PARTY AS P 
+        ON M.MNA_ID = ${id} AND M.LOCAL_ID = L.LOCAL_ID AND M.PARTY_ID = P.PARTY_ID 
+        ORDER BY M.MNA_ID;`,
         {
           model: MNA,
           mapToModel: true

@@ -45,6 +45,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true
       },
+      STDCOMT_TEXT: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
       PARTY_ID: {
         type: Sequelize.INTEGER(11),
         allowNull: true,

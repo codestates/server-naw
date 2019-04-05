@@ -25,3 +25,14 @@ GET /mna/:id
     "rateForStandingCongress": 0.5
 }
 ```
+
+### HOW TO RUN
+
+
+먼저 `config.json`에서 다룰 테이블 명을 정해줍니다. 새로 적으셔도 되나, 해당 이름의 테이블을 미리 만드셔야 합니다. DROP -> CREATE -> INSERT 순으로 진행됩니다.
+
+```bash
+$ yarn db:test:reset
+```
+
+

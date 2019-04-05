@@ -3,7 +3,7 @@ const fs = require("fs");
 var express = require("express");
 var router = express.Router();
 
-const Mna = require("../models").MNA;
+const Bill = require("../models").BILL;
 
 // const { attendanceRate } = require("../utils/attendanceRate.js");
 
@@ -15,26 +15,25 @@ const Mna = require("../models").MNA;
 //   fs.readFileSync("./fakeData/fakePdfData.json", "utf-8")
 // ).meetings;
 
-router.get("", (req, res, next) => {
-  Mna.getList()
+router.get("/all", (req, res, next) => {
+  Bill.getList()
     .then(result => {
       res.status(200).json(result);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).setHeader(err);
+      console.error(error);
+      res.status(500).setHeader(error);
     });
 });
 
 router.get("/:id", (req, res, next) => {
-  Mna.findMna(req.params.id)
+  Bill.findMna(req.params.id)
     .then(result => {
-      console.log(result);
       res.status(200).json(result);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).setHeader(err);
+      console.error(error);
+      res.status(500).setHeader(error);
     });
 });
 
