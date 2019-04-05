@@ -18,7 +18,6 @@ const Mna = require("../models").MNA;
 router.get("", (req, res, next) => {
   Mna.getList()
     .then(result => {
-      console.log(result.slice(0, 3));
       let mnaListData = result.map(mnaItem => ({
         mnaName: mnaItem.dataValues.MNA_NAME,
         party: "자유한국당",
@@ -49,7 +48,7 @@ router.get("/:id", (req, res, next) => {
         address: mnaData.MNA_ADDRESS,
         email: mnaData.MNA_EMAIL,
         mna_url: mnaData.MNA_URL,
-        hoepage: mnaData.MNA_HOMEPAGE,
+        homepage: mnaData.MNA_HOMEPAGE,
         history: mnaData.MNA_HISTORY,
         stdcomtAttendanceRate: 0.88,
         stdcomtAttendanceRatePosition: 20,
