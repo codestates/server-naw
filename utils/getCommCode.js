@@ -50,8 +50,6 @@ var commCodeMap = comm_code_arr.map(char => () => {
   });
 });
 
-// Promise.all(commCodeMap.slice(thReq, thReq + 15)
-
 const sleep = time => {
   return new Promise((res, ref) => {
     setTimeout(() => {
@@ -64,14 +62,16 @@ const sleep = time => {
   try {
     let comm_code_bag = [];
     for (let thReq = 0; thReq < commCodeMap.length; thReq++) {
-      commCodeMap[thReq]().then(res => {
-        comm_code_bag.push(res);
-      });
+      var res = await commCodeMap[thReq]().then(res => {
+        console.log(res);
 
+        return res;
+      });
+      comm_code_bag.push(res);
       console.log(await sleep(500));
     }
     fs.writeFile(
-      "result.json",
+      "stdcomt.json",
       JSON.stringify(comm_code_bag.filter(e => !!e), null, 2),
       err => {
         console.log("File write failed: ", err);
