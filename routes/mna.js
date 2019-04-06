@@ -30,6 +30,7 @@ router.get("", (req, res, next) => {
       let mnaListData = result.map(mnaItem => {
         var randomN = random() * 2;
         return {
+          id: mnaItem.dataValues.MNA_ID,
           mnaName: mnaItem.dataValues.MNA_NAME,
           party: mnaItem.PARTY.PARTY_NAME,
           attendanceRate: gaussian.pdf(randomN) / gaussian.pdf(0.6) - 0.2,
