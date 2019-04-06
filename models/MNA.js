@@ -63,11 +63,11 @@ module.exports = (sequelize, DataTypes) => {
   MNA.associate = function(models) {
     // associations can be defined here
     MNA.belongsTo(models.PARTY, { as: "PARTY", foreignKey: "PARTY_ID" });
-    MNA.belongsToMany(
-      models.STDCOMT,
-      { through: models.MNA_STDCOMT_LINK_TABLE },
-      { as: "STDCOMT", foreignKey: "MNA_ID" }
-    );
+    MNA.belongsToMany(models.STDCOMT, {
+      through: models.MNA_STDCOMT_LINK_TABLE,
+      as: "STDCOMT",
+      foreignKey: "STDCOMT_ID"
+    });
     MNA.belongsTo(models.LOCAL, { as: "LOCAL", foreignKey: "LOCAL_ID" });
     MNA.hasMany(models.BILL, {
       as: "BILL",
