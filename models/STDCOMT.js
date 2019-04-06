@@ -20,11 +20,11 @@ module.exports = (sequelize, DataTypes) => {
   );
   STDCOMT.associate = function(models) {
     // associations can be defined here
-    STDCOMT.belongsToMany(
-      models.MNA,
-      { through: models.MNA_STDCOMT_LINK_TABLE },
-      { as: "MNA", foreignKey: "STDCOMT_ID" }
-    );
+    STDCOMT.belongsToMany(models.MNA, {
+      through: models.MNA_STDCOMT_LINK_TABLE,
+      as: "MNA",
+      foreignKey: "MNA_ID"
+    });
   };
   return STDCOMT;
 };
