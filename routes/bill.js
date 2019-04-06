@@ -4,6 +4,8 @@ var express = require("express");
 var router = express.Router();
 
 const Bill = require("../models").BILL;
+const Mna = require("../models").MNA;
+const Party = require("../models").PARTY;
 
 // const { attendanceRate } = require("../utils/attendanceRate.js");
 
@@ -15,25 +17,50 @@ const Bill = require("../models").BILL;
 //   fs.readFileSync("./fakeData/fakePdfData.json", "utf-8")
 // ).meetings;
 
-router.get("/all", (req, res, next) => {
-  Bill.getList()
+router.get("", (req, res, next) => {
+  Bill.findAll({
+    include: [{ model: Mna, require: true, as: "MNA" }]
+  })
     .then(result => {
-      res.status(200).json(result);
+      console.log(result.dataValues);
+      let billData = result.map(bill => {
+        return {
+          id: bill.BILL_ID,
+          date: bill.BILL_DATE,
+          name: bill.BILL_NAME,
+          primaryLawMakerName: bill.MNA.MNA_NAME,
+          committee: bill.BILL_committee,
+          status: bill.BILL_status
+        };
+      });
+      res.status(200).json(billData);
     })
     .catch(err => {
-      console.error(error);
-      res.status(500).setHeader(error);
+      console.error(err);
+      res.status(500).end(err);
     });
 });
 
 router.get("/:id", (req, res, next) => {
-  Bill.findMna(req.params.id)
+  Bill.findOne({
+    include: [{ model: Mna, require: true, as: "MNA" }],
+    attributes: ["BILL_ID", "BILL_NAME", "BILL_committee", "BILL_status"],
+    where: { BILL_ID: +req.params.id }
+  })
     .then(result => {
-      res.status(200).json(result);
+      res.status(200).json({
+        billId: result[0].BILL_ID,
+        date: result[0].BILL_NAME,
+        primaryLawMakerName: result[0].MNA.MNA_NAME,
+        committee: result[0].BILL_committee,
+        status: result[0].BILL_status,
+        lawMakers: null,
+        summary: null
+      });
     })
     .catch(err => {
-      console.error(error);
-      res.status(500).setHeader(error);
+      console.error(err);
+      res.status(500).end(err);
     });
 });
 

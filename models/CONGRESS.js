@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true
       }
     },
-    {}
+    { tableName: "CONGRESS" }
   );
   CONGRESS.associate = function(models) {
     // associations can be defined here

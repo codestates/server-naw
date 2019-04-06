@@ -8,6 +8,8 @@ var indexRouter = require("./routes");
 var v1Router = require('./routes/v1.js');
 var usersRouter = require("./routes/users.js");
 var mnaRouter = require("./routes/mna.js");
+var partyRouter = require("./routes/party.js");
+var billRouter = require("./routes/bill.js");
 
 var app = express();
 
@@ -24,5 +26,7 @@ app.use("/", indexRouter);
 app.use("/v1", v1Router);
 app.use("/users", usersRouter);
 app.use("/mna", mnaRouter);
+app.use("/party", partyRouter);
+app.use("/bill", billRouter);
 
 module.exports = app;
