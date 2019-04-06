@@ -3,17 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "export NODE_ENV=test && node ./bin/www",
-    "db:test:reset": "export NODE_ENV=test && npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all"
+    "start": "concurrently --kill-others  \"export JWT_SECRET=jwtSecret && export NODE_ENV=test && node ./bin/www\"",
+    "db:test:reset": "export JWT_SECRET=jwtSecret&& export NODE_ENV=test && npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
   "dependencies": {
     "basename": "^0.1.2",
+    "concurrently": "^4.1.0",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "env": "^0.0.2",
     "express": "~4.16.0",
     "global": "^4.3.2",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.5",
     "nodemon": "^1.18.10",
