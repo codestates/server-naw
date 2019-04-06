@@ -51,7 +51,8 @@ router.get("/:id", (req, res, next) => {
     include: [
       { model: Local, require: true, as: "LOCAL" },
       { model: Bill, require: true, as: "BILL" },
-      { model: Stdcomt, require: true, as: "STDCOMT" }
+      { model: Stdcomt, require: true, as: "STDCOMT" },
+      { model: Party, require: true, as: "PARTY" }
     ]
   })
     // Mna.findMna(req.params.id)
@@ -62,7 +63,12 @@ router.get("/:id", (req, res, next) => {
         name: mnaData.MNA_NAME,
         chinesename: mnaData.MNA_HANJA,
         photo: mnaData.MNA_PHOTO,
-        party_id: mnaData.PARTY_ID,
+        party: {
+          id: mnaData.PARTY.PARTY_ID,
+          name: mnaData.PARTY.PARTY_NAME,
+          color: mnaData.PARTY.PARTY_COLOR,
+          logo: mnaData.PARTY.PARTY_LOGO
+        },
         local: mnaData.LOCAL.LOCAL_NAME,
         stdcomt: mnaData.STDCOMT_TEXT,
         phone: mnaData.MNA_PHONE,
