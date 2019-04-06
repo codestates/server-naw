@@ -26,11 +26,25 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true
       }
     },
-    {}
+    { tableName: "PARTY" }
   );
   PARTY.associate = function(models) {
     // associations can be defined here
-    PARTY.hasMany(models.MNA, { foreignKey: "MNA_ID" });
+    PARTY.hasMany(models.MNA, { as: "MNA", foreignKey: "PARTY_ID" });
+  };
+
+  PARTY.findAllCount = () => {
+    return sequelize.query(
+      `SELECT PARTY.PARTY_ID, PARTY_NAME, PARTY_LOGO, PARTY_COLOR, PARTY_LINK, COUNT(MNA.MNA_NAME)
+      FROM PARTY
+      INNER JOIN MNA
+      ON MNA.PARTY_ID=PARTY.PARTY_ID
+      GROUP BY(PARTY.PARTY_NAME);`,
+      {
+        model: PARTY,
+        mapToModel: true
+      }
+    );
   };
   return PARTY;
 };

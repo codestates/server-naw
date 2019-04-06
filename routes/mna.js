@@ -4,6 +4,10 @@ var express = require("express");
 var router = express.Router();
 
 const Mna = require("../models").MNA;
+const Party = require("../models").PARTY;
+
+const random = require("mathjs").random;
+let gaussian = require("gaussian")(0.6, 1);
 
 // const { attendanceRate } = require("../utils/attendanceRate.js");
 
@@ -16,24 +20,29 @@ const Mna = require("../models").MNA;
 // ).meetings;
 
 router.get("", (req, res, next) => {
-  Mna.getList()
+  Mna.findAll({
+    include: [{ model: Party, require: true, as: "PARTY" }]
+  })
     .then(result => {
-      console.log(result.slice(0, 3));
-      let mnaListData = result.map(mnaItem => ({
-        mnaName: mnaItem.dataValues.MNA_NAME,
-        party: "자유한국당",
-        attendanceRate: 50,
-        billCount: 21
-      }));
+      let mnaListData = result.map(mnaItem => {
+        var randomN = random() * 2;
+        return {
+          mnaName: mnaItem.dataValues.MNA_NAME,
+          party: mnaItem.PARTY.PARTY_NAME,
+          attendanceRate: gaussian.pdf(randomN) / gaussian.pdf(0.6) - 0.2,
+          billCount: Number.parseInt(21 * randomN)
+        };
+      });
       res.status(200).json(mnaListData);
     })
     .catch(err => {
       console.log(err);
-      res.status(500).setHeader(err);
+      res.status(500).end(err);
     });
 });
 
 router.get("/:id", (req, res, next) => {
+  let randomN = random() * 2;
   Mna.findMna(req.params.id)
     .then(result => {
       let mnaData = result[0].dataValues;
@@ -49,12 +58,18 @@ router.get("/:id", (req, res, next) => {
         address: mnaData.MNA_ADDRESS,
         email: mnaData.MNA_EMAIL,
         mna_url: mnaData.MNA_URL,
-        hoepage: mnaData.MNA_HOMEPAGE,
+        homepage: mnaData.MNA_HOMEPAGE,
         history: mnaData.MNA_HISTORY,
-        stdcomtAttendanceRate: 0.88,
-        stdcomtAttendanceRatePosition: 20,
-        stdcomtBillSubmitCount: 20,
-        stdcomtBillSubmitCountPosition: 20,
+        stdcomtAttendanceRate: gaussian.pdf(randomN) / gaussian.pdf(0.6) - 0.2,
+        stdcomtAttendanceRatePosition: Number.parseInt(
+          100 * (gaussian.pdf(randomN) / gaussian.pdf(0.6) - 0.2)
+        ),
+        stdcomtBillSubmitCount: Number.parseInt(
+          21 * (gaussian.pdf(randomN) / gaussian.pdf(0.6) - 0.2)
+        ),
+        stdcomtBillSubmitCountPosition: Number.parseInt(
+          20 * (gaussian.pdf(randomN) / gaussian.pdf(0.6) - 0.2)
+        ),
         billsPerCommittee: [
           { name: "법제사법위원회", value: 8 },
           { name: "교육위원회", value: 5 },
@@ -72,7 +87,7 @@ router.get("/:id", (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).setHeader(err);
+      res.status(500).end(err);
     });
 });
 

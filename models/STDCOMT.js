@@ -16,14 +16,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(45)
       }
     },
-    {}
+    { tableName: "STDCOMT" }
   );
   STDCOMT.associate = function(models) {
     // associations can be defined here
     STDCOMT.belongsToMany(
       models.MNA,
       { through: models.MNA_STDCOMT_LINK_TABLE },
-      { foreignKey: "STDCOMT_ID" }
+      { as: "MNA", foreignKey: "STDCOMT_ID" }
     );
   };
   return STDCOMT;
