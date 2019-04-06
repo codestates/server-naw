@@ -53,10 +53,12 @@ router.get("/:id", (req, res, next) => {
       { model: Bill, require: true, as: "BILL" },
       { model: Stdcomt, require: true, as: "STDCOMT" },
       { model: Party, require: true, as: "PARTY" }
-    ]
+    ],
+    where: [{ MNA_ID: +req.params.id }]
   })
     // Mna.findMna(req.params.id)
     .then(result => {
+      console.log(result);
       let mnaData = result[0].dataValues;
       let mnaDataObj = {
         id: mnaData.MNA_ID,
