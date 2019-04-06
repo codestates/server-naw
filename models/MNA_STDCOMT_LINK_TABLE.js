@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER(11)
       }
     },
-    {}
+    { tableName: "MNA_STDCOMT_LINK_TABLE" }
   );
   MNA_STDCOMT_LINK_TABLE.associate = function(models) {
     // associations can be defined here

@@ -8,7 +8,7 @@ var indexRouter = require("./routes");
 var usersRouter = require("./routes/users.js");
 var mnaRouter = require("./routes/mna.js");
 var partyRouter = require("./routes/party.js");
-// var billRouter = require("./routes/bill.js");
+var billRouter = require("./routes/bill.js");
 
 var app = express();
 
@@ -24,6 +24,6 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/mna", mnaRouter);
 app.use("/party", partyRouter);
-// app.use("/bill", billRouter);
+app.use("/bill", billRouter);
 
 module.exports = app;

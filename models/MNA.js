@@ -69,6 +69,10 @@ module.exports = (sequelize, DataTypes) => {
       { as: "STDCOMT", foreignKey: "MNA_ID" }
     );
     MNA.belongsTo(models.LOCAL, { as: "LOCAL", foreignKey: "LOCAL_ID" });
+    MNA.hasMany(models.BILL, {
+      as: "BILL",
+      foreignKey: "BILL_primaryLawMaker"
+    });
   };
 
   MNA.getList = () => {
