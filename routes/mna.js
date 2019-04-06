@@ -5,6 +5,9 @@ var router = express.Router();
 
 const Mna = require("../models").MNA;
 const Party = require("../models").PARTY;
+const Bill = require("../models").BILL;
+const Local = require("../models").LOCAL;
+const Stdcomt = require("../models").STDCOMT;
 
 const random = require("mathjs").random;
 let gaussian = require("gaussian")(0.6, 1);
@@ -43,7 +46,14 @@ router.get("", (req, res, next) => {
 
 router.get("/:id", (req, res, next) => {
   let randomN = random() * 2;
-  Mna.findMna(req.params.id)
+  Mna.findAll({
+    include: [
+      { model: Local, require: true, as: "LOCAL" },
+      { model: Bill, require: true, as: "BILL" },
+      { model: Stdcomt, require: true, as: "STDCOMT" }
+    ]
+  })
+    // Mna.findMna(req.params.id)
     .then(result => {
       let mnaData = result[0].dataValues;
       let mnaDataObj = {
@@ -52,7 +62,7 @@ router.get("/:id", (req, res, next) => {
         chinesename: mnaData.MNA_HANJA,
         photo: mnaData.MNA_PHOTO,
         party_id: mnaData.PARTY_ID,
-        local: "서울 동작구을",
+        local: mnaData.LOCAL.LOCAL_NAME,
         stdcomt: mnaData.STDCOMT_TEXT,
         phone: mnaData.MNA_PHONE,
         address: mnaData.MNA_ADDRESS,
@@ -70,13 +80,14 @@ router.get("/:id", (req, res, next) => {
         stdcomtBillSubmitCountPosition: Number.parseInt(
           20 * (gaussian.pdf(randomN) / gaussian.pdf(0.6) - 0.2)
         ),
-        billsPerCommittee: [
-          { name: "법제사법위원회", value: 8 },
-          { name: "교육위원회", value: 5 },
-          { name: "환경노동위원회", value: 5 },
-          { name: "보건복지위원회", value: 4 },
-          { name: "행정안전위원회", value: 8 }
-        ],
+        billsPerCommittee: mnaData.STDCOMT.map(stdcomt => {
+          return {
+            name: stdcomt.STDCOMT_NAME,
+            value: Number.parseInt(
+              10 * (gaussian.pdf(randomN) / gaussian.pdf(0.6) - 0.2)
+            )
+          };
+        }),
         billsPerStatus: [
           { name: "계류", value: 34 },
           { name: "대안반영폐기", value: 3 },

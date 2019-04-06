@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   LOCAL.associate = function(models) {
     // associations can be defined here
-    LOCAL.hasMany(models.MNA, { as: "MNA", foreignKey: "MNA_ID" });
+    LOCAL.hasMany(models.MNA, { as: "MNA", foreignKey: "LOCAL_ID" });
   };
   return LOCAL;
 };
