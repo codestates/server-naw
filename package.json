@@ -18,7 +18,7 @@
     "express": "~4.16.0",
     "gaussian": "^1.1.0",
     "global": "^4.3.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mathjs": "^5.8.0",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.5",
